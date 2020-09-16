@@ -1,0 +1,20 @@
+{
+  "item.erasium.erasium_ingot" : "Erasium ingot",
+  "item.erasium.erasium_snowball": "Boule de neige en erasium",
+
+  "item.erasium.erasium_sword" : "Erasium sword",
+  "item.erasium.erasium_pickaxe" : "Erasium pickaxe",
+  "item.erasium.erasium_axe" : "Erasium axe",
+  "item.erasium.erasium_shovel" : "Erasium shovel",
+  "item.erasium.erasium_hoe" : "Erasium hoe",
+
+  "item.erasium.erasium_helmet" : "Erasium helmet",
+  "item.erasium.erasium_chestplate" : "Erasium chestplate",
+  "item.erasium.erasium_leggings" : "Erasium leggings",
+  "item.erasium.erasium_boots" : "Erasium boots",
+
+  "block.erasium.erasium_ore": "Erasium ore",
+  "block.erasium.erasium_block": "Erasium block",
+
+  "itemGroup.erasium" : "Erasium"
+}

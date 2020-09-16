@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ee ",
+    "es ",
+    " s "
+  ],
+  "key": {
+    "e": {
+      "item": "erasium:erasium_ingot"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item" : "erasium:erasium_axe",
+    "count" : 1
+  }
+}

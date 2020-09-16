@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ede",
+    "e e",
+    "   "
+  ],
+  "key": {
+    "e": {
+      "item": "erasium:erasium_ingot"
+    },
+    "d": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "item" : "erasium:erasium_helmet",
+    "count" : 1
+  }
+}
