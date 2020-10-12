@@ -1,4 +1,4 @@
-package fr.leonard.erasium.mineur;
+package fr.leonard.erasium.quarry;
 
 import fr.leonard.erasium.Erasium;
 import fr.leonard.erasium.ErasiumBlock;

@@ -1,6 +1,6 @@
 package fr.leonard.erasium;
 
-import fr.leonard.erasium.mineur.ErasiumQuarry;
+import fr.leonard.erasium.quarry.ErasiumQuarry;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

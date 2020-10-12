@@ -1,4 +1,4 @@
-package fr.leonard.erasium.mineur;
+package fr.leonard.erasium.quarry;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

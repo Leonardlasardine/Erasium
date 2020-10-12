@@ -1,4 +1,4 @@
-package fr.leonard.erasium.mineur;
+package fr.leonard.erasium.quarry;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import fr.leonard.erasium.Erasium;

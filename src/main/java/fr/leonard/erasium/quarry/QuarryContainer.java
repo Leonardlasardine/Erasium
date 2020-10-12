@@ -1,4 +1,4 @@
-package fr.leonard.erasium.mineur;
+package fr.leonard.erasium.quarry;
 
 import fr.leonard.erasium.ErasiumBlock;
 import net.minecraft.entity.player.PlayerEntity;

@@ -1,4 +1,4 @@
-package fr.leonard.erasium.mineur;
+package fr.leonard.erasium.quarry;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
