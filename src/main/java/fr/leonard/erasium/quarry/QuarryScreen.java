@@ -78,6 +78,23 @@ public class QuarryScreen extends ContainerScreen<QuarryContainer> implements IC
         }));
     }
 
+    @Override
+    public void tick() {
+        if (!this.minecraft.player.isAlive() || this.minecraft.player.removed) {
+            this.minecraft.player.closeScreen();
+        }
+        if (QuarryTileEntity.isActive) {
+            QuarryScreen.onOff = "On";
+        } else {
+            QuarryScreen.onOff = "Off";
+        }
+        if (QuarryTileEntity.dropBlock) {
+            QuarryScreen.stock = "Drop";
+        } else {
+            QuarryScreen.stock = "Stock";
+        }
+    }
+
     public void resize(@NotNull Minecraft p_resize_1_, int p_resize_2_, int p_resize_3_) {
         String s = this.nameField.getText();
         this.init(p_resize_1_, p_resize_2_, p_resize_3_);

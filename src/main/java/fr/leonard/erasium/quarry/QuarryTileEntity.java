@@ -65,19 +65,6 @@ public class QuarryTileEntity extends LockableLootTileEntity implements ITickabl
                 }
             }
         }
-        assert world != null;
-        if (world.isRemote()) {
-            if (isActive) {
-                QuarryScreen.onOff = "On";
-            } else {
-                QuarryScreen.onOff = "Off";
-            }
-            if (dropBlock) {
-                QuarryScreen.stock = "Drop";
-            } else {
-                QuarryScreen.stock = "Stock";
-            }
-        }
     }
 
     private void init() {
@@ -93,7 +80,6 @@ public class QuarryTileEntity extends LockableLootTileEntity implements ITickabl
             for (int z1 = 0; z1 < radius; z1++) {
                 Block blocksRemoved;
                 BlockPos posToBreak = new BlockPos(x + x1, y, z + z1);
-                assert this.world != null;
                 blocksRemoved = this.world.getBlockState(posToBreak).getBlock();
                 destroyBlock(posToBreak, dropBlock, blocksRemoved);
             }
@@ -102,7 +88,6 @@ public class QuarryTileEntity extends LockableLootTileEntity implements ITickabl
     }
 
     private void destroyBlock(BlockPos pos, boolean dropBlock, Block blockRemoved) {
-        assert world != null;
         BlockState blockstate = world.getBlockState(pos);
         if (!blockstate.isAir(world, pos) && blockstate.getBlock() != Blocks.BEDROCK) {
             IFluidState ifluidstate = world.getFluidState(pos); //I don't know why, I have see on a tutorial
@@ -126,7 +111,6 @@ public class QuarryTileEntity extends LockableLootTileEntity implements ITickabl
                             break;
                         }
                         if (j == 35) {
-                            assert Minecraft.getInstance().player != null;
                             sendMessage();
                             isChestFull = true;
                             break;
@@ -225,7 +209,6 @@ public class QuarryTileEntity extends LockableLootTileEntity implements ITickabl
         double dx = (double) this.pos.getX() + 0.5D;
         double dy = (double) this.pos.getY() + 0.5D;
         double dz = (double) this.pos.getZ() + 0.5D;
-        assert this.world != null;
         this.world.playSound(null, dx, dy, dz, sound, SoundCategory.BLOCKS, 0.5f,
                 this.world.rand.nextFloat() * 0.1f + 0.9f);
     }
@@ -263,7 +246,6 @@ public class QuarryTileEntity extends LockableLootTileEntity implements ITickabl
     protected void onOpenOrClose() {
         Block block = this.getBlockState().getBlock();
         if (block instanceof ErasiumQuarry) {
-            assert this.world != null;
             this.world.addBlockEvent(this.pos, block, 1, this.numPlayersUsing);
             this.world.notifyNeighborsOfStateChange(this.pos, block);
         }
