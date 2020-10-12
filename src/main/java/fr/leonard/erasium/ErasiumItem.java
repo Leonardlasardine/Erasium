@@ -6,43 +6,71 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.LazyValue;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ObjectHolder;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Supplier;
 
-@Mod.EventBusSubscriber(modid = Erasium.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-@ObjectHolder(Erasium.MODID)
 public class ErasiumItem {
 
-    public static final Item erasium_ingot = null, erasium_sword = null, erasium_pickaxe = null, erasium_axe = null, erasium_shovel = null, erasium_hoe = null,
-            erasium_helmet = null, erasium_chestplate = null, erasium_leggings = null, erasium_boots = null, erasium_snwoball = null, erasium_stick = null;
+    public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, Erasium.MODID);
 
-    @SubscribeEvent
-    public static void registerItems (final RegistryEvent.Register <Item> e) {
-        e.getRegistry().register(new Item(new Item.Properties().group(Erasium.ErasiumGroup.instance)).setRegistryName("erasium_ingot"));
-        e.getRegistry().register(new ErasiumSnowball());
-        e.getRegistry().register(new ErasiumStick());
 
-        e.getRegistry().register(new SwordItem(ERASIUM_TOOL.ERASIUM_TOOL, 5, 8.0F, new Item.Properties().group(Erasium.ErasiumGroup.instance)).setRegistryName("erasium_sword"));
-        e.getRegistry().register(new PickaxeItem(ERASIUM_TOOL.ERASIUM_TOOL, 3, 10.0F, new Item.Properties().group(Erasium.ErasiumGroup.instance)).setRegistryName("erasium_pickaxe"));
-        e.getRegistry().register(new AxeItem(ERASIUM_TOOL.ERASIUM_TOOL, 5, 3.0F, new Item.Properties().group(Erasium.ErasiumGroup.instance)).setRegistryName("erasium_axe"));
-        e.getRegistry().register(new ShovelItem(ERASIUM_TOOL.ERASIUM_TOOL, 2, 6.0F, new Item.Properties().group(Erasium.ErasiumGroup.instance)).setRegistryName("erasium_shovel"));
-        e.getRegistry().register(new HoeItem(ERASIUM_TOOL.ERASIUM_TOOL, 2, 4.0F, new Item.Properties().group(Erasium.ErasiumGroup.instance)).setRegistryName("erasium_hoe"));
+    public static final RegistryObject<Item> ERASIUM_INGOT = ITEMS.register("erasium_ingot", () -> new Item(new Item.Properties().group(Erasium.ErasiumGroup.instance)));
 
-        e.getRegistry().register(new ArmorItem(ERASIUM_ARMOR.ERASIUM_ARMOR, EquipmentSlotType.HEAD, new Item.Properties().group(Erasium.ErasiumGroup.instance)).setRegistryName("erasium_helmet"));
-        e.getRegistry().register(new ArmorItem(ERASIUM_ARMOR.ERASIUM_ARMOR, EquipmentSlotType.CHEST, new Item.Properties().group(Erasium.ErasiumGroup.instance)).setRegistryName("erasium_chestplate"));
-        e.getRegistry().register(new ArmorItem(ERASIUM_ARMOR.ERASIUM_ARMOR, EquipmentSlotType.LEGS, new Item.Properties().group(Erasium.ErasiumGroup.instance)).setRegistryName("erasium_leggings"));
-        e.getRegistry().register(new ArmorItem(ERASIUM_ARMOR.ERASIUM_ARMOR, EquipmentSlotType.FEET, new Item.Properties().group(Erasium.ErasiumGroup.instance)).setRegistryName("erasium_boots"));
-    }
+    public static final RegistryObject<ErasiumSnowball> ERASIUM_SNOWBALL = ITEMS.register("erasium_snowball",
+            () -> new ErasiumSnowball(new Item.Properties().group(Erasium.ErasiumGroup.instance)));
+
+    public static final RegistryObject<ErasiumStick> ERASIUM_STICK= ITEMS.register("erasium_stick",
+            () -> new ErasiumStick(new Item.Properties().group(Erasium.ErasiumGroup.instance)));
+
+    public static final RegistryObject<SwordItem> ERASIUM_SWORD = ITEMS.register("erasium_sword",
+            () -> new SwordItem(ERASIUM_TOOL.ERASIUM_TOOL, 5, 8.0F, new Item.Properties().group(Erasium.ErasiumGroup.instance)));
+
+    public static final RegistryObject<PickaxeItem> ERASIUM_PICKAXE = ITEMS.register("erasium_pickaxe",
+            () -> new PickaxeItem(ERASIUM_TOOL.ERASIUM_TOOL, 3, 10.0F, new Item.Properties().group(Erasium.ErasiumGroup.instance)));
+
+    public static final RegistryObject<AxeItem> ERASIUM_AXE = ITEMS.register("erasium_axe",
+            () -> new AxeItem(ERASIUM_TOOL.ERASIUM_TOOL, 5, 3.0F, new Item.Properties().group(Erasium.ErasiumGroup.instance)));
+
+    public static final RegistryObject<ShovelItem> ERASIUM_SHOVEL = ITEMS.register("erasium_shovel",
+            () -> new ShovelItem(ERASIUM_TOOL.ERASIUM_TOOL, 2, 6.0F, new Item.Properties().group(Erasium.ErasiumGroup.instance)));
+
+    public static final RegistryObject<HoeItem> ERASIUM_HOE = ITEMS.register("erasium_hoe",
+            () -> new HoeItem(ERASIUM_TOOL.ERASIUM_TOOL, 2, new Item.Properties().group(Erasium.ErasiumGroup.instance)));
+
+    public static final RegistryObject<ErasiumHelmet> ERASIUM_HELMET = ITEMS.register("erasium_helmet",
+            ErasiumHelmet::new);
+
+    public static final RegistryObject<ArmorItem> ERASIUM_CHESTPLATE = ITEMS.register("erasium_chestplate",
+            () -> new ArmorItem(ERASIUM_ARMOR.ERASIUM_ARMOR, EquipmentSlotType.CHEST, new Item.Properties().group(Erasium.ErasiumGroup.instance)));
+
+    public static final RegistryObject<ArmorItem> ERASIUM_LEGGINGS = ITEMS.register("erasium_leggings",
+            () -> new ArmorItem(ERASIUM_ARMOR.ERASIUM_ARMOR, EquipmentSlotType.LEGS, new Item.Properties().group(Erasium.ErasiumGroup.instance)));
+
+    public static final RegistryObject<ArmorItem> ERASIUM_BOOTS = ITEMS.register("erasium_boots",
+            () -> new ArmorItem(ERASIUM_ARMOR.ERASIUM_ARMOR, EquipmentSlotType.FEET, new Item.Properties().group(Erasium.ErasiumGroup.instance)));
+
+
+
+
+
+    public static final RegistryObject<BlockItem> ERASIUM_ORE =
+            ITEMS.register("erasium_ore", () -> new BlockItem(ErasiumBlock.ERASIUM_ORE.get(), new Item.Properties().group(Erasium.ErasiumGroup.instance)));
+
+    public static final RegistryObject<BlockItem> ERASIUM_BLOCK =
+            ITEMS.register("erasium_block", () -> new BlockItem(ErasiumBlock.ERASIUM_BLOCK.get(), new Item.Properties().group(Erasium.ErasiumGroup.instance)));
+
+    public static final RegistryObject<BlockItem> ERASIUM_QUARRY =
+            ITEMS.register("erasium_quarry", () -> new BlockItem(ErasiumBlock.ERASIUM_QUARRY.get(), new Item.Properties().group(Erasium.ErasiumGroup.instance)));
+
 
     public enum ERASIUM_TOOL implements IItemTier {
 
-        ERASIUM_TOOL(5, 2512, 10.0F, 5.0F, 8.0F, 25, () -> { return Ingredient.fromItems(ErasiumItem.erasium_ingot);});
+        ERASIUM_TOOL(5, 2512, 10.0F, 7.0F, 16.0F, 25, () -> { return Ingredient.fromItems(ErasiumItem.ERASIUM_INGOT.get());});
 
         private final int harvestLevel;
         private final int maxUses;
@@ -90,13 +118,13 @@ public class ErasiumItem {
 
         @Override
         public Ingredient getRepairMaterial() {
-            return Ingredient.fromItems(ErasiumItem.erasium_ingot);
+            return Ingredient.fromItems(ErasiumItem.ERASIUM_INGOT.get());
         }
     }
 
     public enum ERASIUM_ARMOR implements IArmorMaterial {
 
-        ERASIUM_ARMOR(Erasium.MODID + ":armor", new int[] {4, 7, 9, 4},2000, 25, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F,() -> { return Ingredient.fromItems(ErasiumItem.erasium_ingot);});
+        ERASIUM_ARMOR(Erasium.MODID + ":armor", new int[] {5, 8, 10, 5},2000, 25, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 4.0F,() -> { return Ingredient.fromItems(ErasiumItem.ERASIUM_INGOT.get());});
 
         private final String name;
         private final int[] damageReductionAmount;
@@ -142,7 +170,7 @@ public class ErasiumItem {
         @Override
         @Nonnull
         public Ingredient getRepairMaterial() {
-            return Ingredient.fromItems(ErasiumItem.erasium_ingot);
+            return Ingredient.fromItems(ErasiumItem.ERASIUM_INGOT.get());
         }
 
         @Override
@@ -154,11 +182,6 @@ public class ErasiumItem {
         @Override
         public float getToughness() {
             return toughness;
-        }
-
-        @Override
-        public float func_230304_f_() {
-            return 0;
         }
     }
 }

@@ -17,6 +17,10 @@
 
   "block.erasium.erasium_ore": "Erasium ore",
   "block.erasium.erasium_block": "Erasium block",
+  "block.erasium.erasium_quarry": "Erasium machine",
 
-  "itemGroup.erasium" : "Erasium"
+  "itemGroup.erasium" : "Erasium",
+
+  "container.erasium_quarry" : "Mineur",
+  "container.radius": "Rayon"
 }

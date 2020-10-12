@@ -17,6 +17,10 @@
 
   "block.erasium.erasium_ore": "Minerai d'erasium",
   "block.erasium.erasium_block": "Block d'erasium",
+  "block.erasium.erasium_quarry": "Mineur en erasium",
 
-  "itemGroup.erasium": "Erasium"
+  "itemGroup.erasium": "Erasium",
+
+  "container.erasium_quarry" : "Mineur",
+  "container.radius": "Rayon"
 }

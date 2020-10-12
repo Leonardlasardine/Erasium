@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ede",
+    "dpd",
+    "ede"
+  ],
+  "key": {
+    "e": {
+      "item": "erasium:erasium_block"
+    },
+    "d": {
+      "item": "minecraft:diamond_block"
+    },
+    "p": {
+      "item": "erasium:erasium_pickaxe"
+    }
+  },
+  "result": {
+    "item" : "erasium:erasium_quarry",
+    "count" : 1
+  }
+}

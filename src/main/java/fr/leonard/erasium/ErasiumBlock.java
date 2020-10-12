@@ -1,31 +1,25 @@
 package fr.leonard.erasium;
 
-import net.minecraft.block.AbstractBlock;
+import fr.leonard.erasium.mineur.ErasiumQuarry;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
 import net.minecraftforge.common.ToolType;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ObjectHolder;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
-@Mod.EventBusSubscriber(modid = Erasium.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-@ObjectHolder(Erasium.MODID)
 public class ErasiumBlock {
 
-    public static final Block erasium_ore = null, erasium_block = null;
+    public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, Erasium.MODID);
 
-    @SubscribeEvent
-    public static void registerBlock(final RegistryEvent.Register<Block> e) {
-        e.getRegistry().register(new ErasiumOre());
-        e.getRegistry().register(new Block(AbstractBlock.Properties.create(Material.ROCK).hardnessAndResistance(5.0f, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(3)).setRegistryName("erasium_block"));
-    }
 
-    @SubscribeEvent
-    public static void registerBlockItem(final RegistryEvent.Register<Item> e) {
-        e.getRegistry().register(new BlockItem(erasium_ore, new Item.Properties().group(Erasium.ErasiumGroup.instance)).setRegistryName("erasium_ore"));
-        e.getRegistry().register(new BlockItem(erasium_block, new Item.Properties().group(Erasium.ErasiumGroup.instance)).setRegistryName("erasium_block"));
-    }
+    public static final RegistryObject<Block> ERASIUM_ORE = BLOCKS.register("erasium_ore", ErasiumOre::new);
+
+    public static final RegistryObject<Block> ERASIUM_BLOCK = BLOCKS.register("erasium_block",
+            () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(5.0f, 6.0f)
+                    .harvestLevel(3).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE).lightValue(4)));
+
+    public static final RegistryObject<Block> ERASIUM_QUARRY = BLOCKS.register(
+            "erasium_quarry", () -> new ErasiumQuarry(Block.Properties.create(Material.IRON)));
 }

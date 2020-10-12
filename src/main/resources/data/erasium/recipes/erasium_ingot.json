@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "erasium:erasium_ore"
+  },
+  "result": "erasium:erasium_ingot",
+  "experience": 160.0,
+  "cookingtime": 200
+}

@@ -7,7 +7,6 @@ import net.minecraft.entity.monster.BlazeEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ItemParticleData;
 import net.minecraft.particles.ParticleTypes;
@@ -19,8 +18,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class ErasiumSnowballEntity extends ProjectileItemEntity {
-   public ErasiumSnowballEntity(EntityType<? extends ErasiumSnowballEntity> p_i50159_1_, World p_i50159_2_) {
-      super(p_i50159_1_, p_i50159_2_);
+   public ErasiumSnowballEntity(EntityType<? extends ErasiumSnowballEntity> entityType, World world) {
+      super(entityType, world);
    }
 
    public ErasiumSnowballEntity(World worldIn, LivingEntity throwerIn) {
@@ -32,13 +31,13 @@ public class ErasiumSnowballEntity extends ProjectileItemEntity {
    }
 
    protected Item getDefaultItem() {
-      return Items.SNOWBALL;
+      return ErasiumItem.ERASIUM_SNOWBALL.get();
    }
 
    @OnlyIn(Dist.CLIENT)
    private IParticleData makeParticle() {
       ItemStack itemstack = this.func_213882_k();
-      return (IParticleData)(itemstack.isEmpty() ? ParticleTypes.ITEM_SNOWBALL : new ItemParticleData(ParticleTypes.ITEM, itemstack));
+      return itemstack.isEmpty() ? ParticleTypes.ITEM_SNOWBALL : new ItemParticleData(ParticleTypes.ITEM, itemstack);
    }
 
    /**
@@ -57,21 +56,18 @@ public class ErasiumSnowballEntity extends ProjectileItemEntity {
    }
 
    /**
-    * Called when the arrow hits an entity
-    */
-   protected void onEntityHit(EntityRayTraceResult p_213868_1_) {
-      super.onEntityHit(p_213868_1_);
-      Entity entity = p_213868_1_.getEntity();
-      int i = entity instanceof BlazeEntity ? 3 : 0;
-      entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.func_234616_v_()), (float)i);
-      entity.attackEntityFrom(DamageSource.DROWN, 2);
-   }
-
-   /**
-    * Called when this EntityFireball hits a block or entity.
+    * Called when this EntityThrowable hits a block or entity.
     */
    protected void onImpact(RayTraceResult result) {
-      super.onImpact(result);
+      if (result.getType() == RayTraceResult.Type.ENTITY) {
+         Entity entity = ((EntityRayTraceResult)result).getEntity();
+         int i = entity instanceof BlazeEntity ? 3 : 0;
+         entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)i);
+
+         //Les dégâts
+         entity.attackEntityFrom(DamageSource.DROWN, 8);
+      }
+
       if (!this.world.isRemote) {
          this.world.setEntityState(this, (byte)3);
          this.remove();
