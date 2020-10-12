@@ -107,15 +107,15 @@ public class QuarryTileEntity extends LockableLootTileEntity implements ITickabl
         assert world != null;
         BlockState blockstate = world.getBlockState(pos);
         if (!blockstate.isAir(world, pos) && blockstate.getBlock() != Blocks.BEDROCK) {
-            IFluidState ifluidstate = world.getFluidState(pos);
+            IFluidState ifluidstate = world.getFluidState(pos); //I don't know why, I have see on a tutorial
             //FMLClientHandler.instance().getServer().worldServerForDimension(0).destroyBlock(x, y, z, false);
-            //if (!world.isRemote()) {
-            //world.playEvent(2001, pos, Block.getStateId(blockstate));
-                //world.removeBlock(pos, false);
+            //if (!world.isRemote()) { // Doesn't work
+            world.playEvent(2001, pos, Block.getStateId(blockstate));
+                world.removeBlock(pos, false);
                 world.setBlockState(pos, Blocks.AIR.getDefaultState());
                 world.removeBlock(pos, false);
-                world.destroyBlock(pos, false); //ca drop 1 ligne
-                Objects.requireNonNull(Minecraft.getInstance().getIntegratedServer()).getWorld(DimensionType.OVERWORLD).destroyBlock(new BlockPos(x, y, z), true);
+                world.destroyBlock(pos, false);
+// Only Solo Worlds Objects.requireNonNull(Minecraft.getInstance().getIntegratedServer()).getWorld(DimensionType.OVERWORLD).destroyBlock(new BlockPos(x, y, z), true);
             //}
             TileEntity tileentity = blockstate.hasTileEntity() ? world.getTileEntity(pos) : null;
             if (dropBlock) {
