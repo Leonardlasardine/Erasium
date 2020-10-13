@@ -89,23 +89,17 @@ public class QuarryTileEntity extends LockableLootTileEntity implements ITickabl
 
     private void destroyBlock(BlockPos pos, boolean dropBlock, Block blockRemoved) {
         BlockState blockstate = world.getBlockState(pos);
+        BlockState newBlockstate = world.getBlockState(pos);
         if (!blockstate.isAir(world, pos) && blockstate.getBlock() != Blocks.BEDROCK) {
-            IFluidState ifluidstate = world.getFluidState(pos); //I don't know why, I have see on a tutorial
-            //FMLClientHandler.instance().getServer().worldServerForDimension(0).destroyBlock(x, y, z, false);
-            //if (!world.isRemote()) { // Doesn't work
-            world.playEvent(2001, pos, Block.getStateId(blockstate));
-                world.removeBlock(pos, false);
-                world.setBlockState(pos, Blocks.AIR.getDefaultState());
-                world.removeBlock(pos, false);
-                world.destroyBlock(pos, false);
-// Only Solo Worlds Objects.requireNonNull(Minecraft.getInstance().getIntegratedServer()).getWorld(DimensionType.OVERWORLD).destroyBlock(new BlockPos(x, y, z), true);
-            //}
+            if (!world.isRemote()) {
+                newBlockstate = Blocks.AIR.getDefaultState();
+            }
             TileEntity tileentity = blockstate.hasTileEntity() ? world.getTileEntity(pos) : null;
             if (dropBlock) {
                 Block.spawnDrops(blockstate, world, this.pos.add(0, 1.5, 0), tileentity, null, ItemStack.EMPTY);
             } else if (!isChestFull) {
                 for (int i = 0; i < 36; i++) {
-                    //Coffre plein
+                    //Coffre plein -- Chest Full
                     for (int j = 0; j < 36; j++) {
                         if (getStackInSlot(j).isEmpty()) {
                             break;
@@ -129,8 +123,8 @@ public class QuarryTileEntity extends LockableLootTileEntity implements ITickabl
                     }
                 }
             }
-            world.setBlockState(pos, ifluidstate.getBlockState(), 3);
         }
+        world.setBlockState(pos, newBlockstate, 3);
     }
 
     public QuarryTileEntity(final TileEntityType<?> tileEntityTypeIn) {
