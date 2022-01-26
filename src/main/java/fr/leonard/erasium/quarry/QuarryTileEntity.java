@@ -1,5 +1,6 @@
 package fr.leonard.erasium.quarry;
 
+import fr.leonard.erasium.packet.ErasiumPacketHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -44,7 +45,8 @@ public class QuarryTileEntity extends LockableLootTileEntity implements ITickabl
     public static int radius = 3;
     public static boolean dropBlock = false;
     boolean isChestFull = false;
-    public static boolean isActive = false;
+    public static boolean isActive = true;
+    int packetIndex = 1;
 
     private NonNullList<ItemStack> chestContents = NonNullList.withSize(36, ItemStack.EMPTY);
     protected int numPlayersUsing;
@@ -82,6 +84,9 @@ public class QuarryTileEntity extends LockableLootTileEntity implements ITickabl
                 BlockPos posToBreak = new BlockPos(x + x1, y, z + z1);
                 blocksRemoved = this.world.getBlockState(posToBreak).getBlock();
                 destroyBlock(posToBreak, dropBlock, blocksRemoved);
+
+                //ErasiumPacketHandler.INSTANCE.registerMessage(packetIndex++, )
+
             }
         }
         y--;
@@ -124,7 +129,7 @@ public class QuarryTileEntity extends LockableLootTileEntity implements ITickabl
                 }
             }
         }
-        world.setBlockState(pos, newBlockstate, 3);
+        world.setBlockState(pos, newBlockstate, 1);
     }
 
     public QuarryTileEntity(final TileEntityType<?> tileEntityTypeIn) {

@@ -28,11 +28,9 @@ public class ErasiumGen {
             }
             if (biome.getCategory() == Biome.Category.THEEND) {
                 genOre(biome, 4, 4, 5, 150, END_STONE, ErasiumBlock.ERASIUM_ORE.get().getDefaultState(), 12);
-
             }
             else {
                 genOre(biome, 4, 4, 5, 30, OreFeatureConfig.FillerBlockType.NATURAL_STONE, ErasiumBlock.ERASIUM_ORE.get().getDefaultState(), 12);
-
             }
         }
     }
